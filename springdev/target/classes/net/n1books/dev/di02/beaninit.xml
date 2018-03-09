@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="outputter" class="net.n1books.dev.di02.FileOutputterImpl">
+		<property name="fileName" value="output.txt" />
+	</bean>
+
+	<bean id="mbean" class="net.n1books.dev.di02.MessageBeanImpl">
+		<property name="name" value="마이주~~~~" />
+		<property name="greeting" value="안녕하세요~" />
+		<property name="output" ref="outputter" />
+	</bean>
+</beans>
