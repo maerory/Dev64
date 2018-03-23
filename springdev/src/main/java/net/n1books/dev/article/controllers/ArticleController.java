@@ -24,31 +24,48 @@ public class ArticleController {
 	public void insert() {}
 	
 	@RequestMapping(value="insert", method=RequestMethod.POST)
-	public ModelAndView insert(ArticleVO articleVO) {
+	public ModelAndView insert(@ModelAttribute ArticleVO articleVO) {
+		logger.info("insert() start~!!"); 
 		try {
+			Thread.sleep(2000);
 			service.insert(articleVO);
-			
+			logger.info("insert() end~!!"); 
 			return new ModelAndView("redirect:list");
-			
 		} catch (Exception e) {
 			logger.info("입력실패 : " + e.getMessage());
-			
+
 			ModelAndView mav = new ModelAndView("result");
 			mav.addObject("msg","입력 실패");
 			mav.addObject("url","javascript:history.back();");
+			logger.info("insert() end~!!"); 
 			return mav;
 		}
 	}
 	
-	@RequestMapping(value="list")
-	public ModelAndView list() {
+	@RequestMapping(value="list", method=RequestMethod.GET)
+	public ModelAndView list(
+		@RequestParam(defaultValue="1") long pg) {
+		
 		try {
-			List<ArticleVO> list = service.getArticleList();
-			return new ModelAndView("article/list", "list",list);
-		} catch(Exception e) {
-			logger.info("예외 발생: " + e.getMessage());
+			long totalArticle = service.getTotalArticle();
+			long totalPage = service.getTotalPage(totalArticle);
+			long startPage = service.getStartPage(pg);
+			long endPage = service.getEndPage(pg, totalPage);
+						
+			List<ArticleVO> list = service.getArticlePageList(pg);
+			ModelAndView mav = new ModelAndView("article/list");
+			mav.addObject("list", list);
+			mav.addObject("totalPage", totalPage);
+			mav.addObject("pg", pg);
+			mav.addObject("startPage", startPage);
+			mav.addObject("endPage", endPage);
+			return mav;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info("예외 발생 : " + e.getMessage());
 			ModelAndView mav = new ModelAndView("result");
-			mav.addObject("msg","리스트 출력 불가");
+			mav.addObject("msg","리스트를 출력할 수 없어요ㅜㅜ");
 			mav.addObject("url","../");
 			return mav;
 		}
@@ -59,11 +76,10 @@ public class ArticleController {
 		try {
 			service.updateReadcount(no);
 			ArticleVO vo = service.getArticle(no);
-			return new ModelAndView("article/content","articleVO",vo);
+			return new ModelAndView("article/content", "articleVO", vo);
 		} catch (Exception e) {
-			logger.info("예외 발생: " + e.getMessage());
 			ModelAndView mav = new ModelAndView("result");
-			mav.addObject("msg",no + "번 게시물 상세보기 실패");
+			mav.addObject("msg",no+"번 게시물 상세보기 실패");
 			mav.addObject("url","list");
 			return mav;
 		}
@@ -71,7 +87,7 @@ public class ArticleController {
 	
 	@RequestMapping(value="delete", method=RequestMethod.GET)
 	public ModelAndView delete(long no) {
-		return new ModelAndView("article/delete","no",no);
+		return new ModelAndView("article/delete", "no", no);
 	}
 	
 	@RequestMapping(value="delete", method=RequestMethod.POST)
@@ -81,7 +97,7 @@ public class ArticleController {
 			service.delete(articleVO);
 			mav.addObject("msg", articleVO.getNo() + "번 게시물이 삭제되었습니다.");
 			mav.addObject("url","list");
-		} catch(Exception e) {
+		} catch (Exception e) {
 			//logger.info(e.getMessage());
 			mav.addObject("msg", e.getMessage());
 			mav.addObject("url","javascript:history.go(-1);");
@@ -89,11 +105,11 @@ public class ArticleController {
 		return mav;
 	}
 	
-	@RequestMapping(value="update",method=RequestMethod.GET)
+	@RequestMapping(value="update", method=RequestMethod.GET)
 	public ModelAndView update(long no) {
 		try {
 			ArticleVO vo = service.getArticle(no);
-			return new ModelAndView("article/update","articleVO",vo);
+			return new ModelAndView("article/update", "articleVO", vo);
 		} catch (NoArticleException e) {
 			ModelAndView mav = new ModelAndView("result");
 			mav.addObject("msg",e.getMessage());
@@ -101,7 +117,7 @@ public class ArticleController {
 			return mav;
 		} catch (Exception e) {
 			ModelAndView mav = new ModelAndView("result");
-			mav.addObject("msg", "시스템 오류");
+			mav.addObject("msg","시스템 오류");
 			mav.addObject("url","list");
 			return mav;
 		}

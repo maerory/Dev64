@@ -23,8 +23,11 @@
 		<a href="music/funk">funk</a>
 		<a href="music/classic">classic</a>
 	</li>
-	<li><a href="article/insert">게시물 입력</a></li>
-	
+	<li><a href="article/list">게시물 올릴래요</a></li>
+	<li><a href="translator/">번역해주세요!</a></li>
+	<li><a href="file/upload">파일올려주세요!</a></li>
+	<li><a href="restful/유주우">RestFul써보세요!</a></li>
+	<li><a href="restful2/form">RestFul 2탄 써보세요!</a></li>
 	
 </ol>
 </body>

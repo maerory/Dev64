@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<bean id="dataSource" 
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="username" value="n1" />
+		<property name="password" value="n1" />
+	</bean>
+	
+	<!-- spring jdbc start -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- spring jdbc end -->
+	
+	<!-- ibatis start -->
+	<bean id="sqlMapClientFactoryBean" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="/WEB-INF/SqlMapConfig.xml" />
+	</bean>
+	<bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+		<property name="sqlMapClient" ref="sqlMapClientFactoryBean" />
+	</bean>
+	<!-- ibatis end -->	
+	
+	<!-- mybatis start -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage" value="net.n1books.dev.article.controllers" />
+	</bean>
+	<bean id="mybatisArticle" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactoryBean" />
+		<property name="mapperInterface" value="net.n1books.dev.article.controllers.ArticleDAO" />
+	</bean>
+	<!-- mybatis end -->
+	
+	
+	
+</beans>

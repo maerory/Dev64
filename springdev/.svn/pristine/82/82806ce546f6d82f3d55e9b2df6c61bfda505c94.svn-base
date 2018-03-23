@@ -1,0 +1,19 @@
+MusicController
+
+http://localhost/music/pop
+	King of POP
+
+http://localhost/music/rock
+	We will rock you
+
+http://localhost/music/funk
+	Get the funk out~
+
+http://localhost/music/classic
+	Rest in peace, Mozart~
+	
+curl -X POST -u "username":"password" ^
+--header "Content-Type: application/json" ^
+--data "{\"text\":\"hello world\"}" ^
+--output hello_world.ogg ^
+"https://stream.watsonplatform.net/text-to-speech/api/v1/synthesize"

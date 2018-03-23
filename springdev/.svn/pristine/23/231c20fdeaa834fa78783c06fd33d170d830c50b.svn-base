@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper      
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"      
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.n1books.dev.article.controllers.ArticleDAO">
+	<select id="getTotalArticle" resultType="long">
+	select count(*) as cnt
+	from   t_article
+	</select>
+
+	<select id="getArticleList" resultType="ArticleVO">
+	select no, title, name, readcount
+	      ,to_char(regdate,'YYYY/MM/DD') as regdate
+	from   t_article
+	order  by no desc
+	</select>
+	
+	<select id="getArticlePageList" 
+	parameterType="PageVO" resultType="ArticleVO">
+	SELECT B.*
+	FROM  (SELECT rownum as rnum, A.*
+	       FROM	 (select no, title, name, readcount
+		                ,to_char(regdate,'YYYY/MM/DD') as regdate
+		          from   t_article
+		          order  by no desc) A) B
+    WHERE  rnum between #{startnum} and #{endnum}
+	</select>
+	
+	
+	<insert id="insert" parameterType="ArticleVO">
+	INSERT INTO t_article(no, title, name, passwd, content)
+	VALUES(seq_article.nextval, #{title}, #{name}, #{passwd}, #{content})
+	</insert>
+	
+ 	<select id="getArticle" parameterType="long" resultType="ArticleVO">
+	select no, title, name, readcount, regdate, content
+	from   t_article
+	where  no=#{no}
+	</select>
+
+ 	
+	<update id="updateReadcount" parameterType="long">
+	UPDATE t_article SET
+	       readcount = readcount + 1
+	WHERE  no = #{no}
+	</update>
+	
+	<update id="update" parameterType="ArticleVO">
+	UPDATE t_article SET
+	       name=#{name}, title=#{title}, content=#{content}
+	WHERE  no=#{no} AND passwd=#{passwd}
+	</update>
+	<delete id="delete" parameterType="ArticleVO">
+	DELETE FROM t_article
+	WHERE  no=#{no} AND passwd=#{passwd}
+	</delete>
+</mapper>

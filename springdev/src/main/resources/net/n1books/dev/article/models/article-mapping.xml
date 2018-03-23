@@ -6,18 +6,34 @@
 
 <sqlMap namespace="article">
 	<typeAlias alias="ArticleVO" type="net.n1books.dev.article.controllers.ArticleVO"/>
-
+	
 	<select id="getArticleList" resultClass="ArticleVO">
 	select no, title, name, readcount
-		,to_char(regdate,'YYYY/MM/DD') as regdate
-	from t_article
-	order by no desc
-	
+	      ,to_char(regdate,'YYYY/MM/DD') as regdate
+	from   t_article
+	order  by no desc
 	</select>
 	
-	<insert id="article.insert" parameterClass="ArticleVO">
+	<insert id="insert" parameterClass="ArticleVO">
 	INSERT INTO t_article(no, title, name, passwd, content)
-	VALUES(seq_article.nextval, ?, ?, ?, ?)
+	VALUES(seq_article.nextval, #title#, #name#, #passwd#, #content#)
 	</insert>
 	
+	<select id="getArticle" parameterClass="long" resultClass="ArticleVO">
+	select no, title, name, readcount, regdate, content
+	from   t_article
+	where  no=#no#
+	</select>
+	
+	<update id="updateReadcount" parameterClass="long">
+	UPDATE t_article SET
+	       readcount = readcount + 1
+	WHERE  no = #no#
+	</update>
+	
+	<update id="update" parameterClass="ArticleVO">
+	UPDATE t_article SET
+	       name=#name#, title=#title#, content=#content#
+	WHERE  no=#no# AND passwd=#passwd#
+	</update>
 </sqlMap>

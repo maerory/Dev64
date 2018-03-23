@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 
+	beaninit.xml을 수정하여
+	LgTV에 AppleSpeaker를 장착
+
+	1. Speaker를 구현한 AppleSpeaker를 생성
+	2. LgTV에 Speaker의 참조변수 생성
+	3. LgTV에 setSpeaker 메소드 작성
+	4. LgTV에 soundUp(), soundDown() 메소드 작성
+	5. Spring bean configuration file
+	   (beaninit.xml)에 DI설정
+	-->
+
+	<bean name="speaker" class="net.n1books.dev.di01.AppleSpeaker" />
+
+	<bean name="tv" class="net.n1books.dev.di01.SonyTV">
+		<property name="speaker" ref="speaker" />
+	</bean>
+</beans>
