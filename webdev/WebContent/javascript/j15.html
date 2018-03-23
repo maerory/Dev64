@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+var member = {
+		이름 : '강백호',
+		별명 : ['천재','멍청이','반칙왕'],
+		키 : 189.5,
+		'몸무게?' : 64,
+		프로필: function() {
+			return this.이름 + '의 별명은 ' + this.별명[parseInt(Math.random()* this.별명.length)] + '입니다.';
+		},
+		여자친구: '채소연'
+}
+
+with (member) {
+	document.write(이름);
+	document.write(별명);
+}
+</script>
+</body>
+</html>

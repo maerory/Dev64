@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function shift_right() {
+	console.log("shift right~");
+	
+	if (document.getElementById("t1") === '') {
+		alert('No Message.');
+	} else {
+		document.getElementById("t2").value = document.getElementById("t1").value;
+		document.getElementById("t1").value = '';
+	}
+}
+
+function shift_left() {
+	console.log("shift left~");
+	
+	if (document.getElementById("t2") === '') {
+		alert('No Message.');
+	} else {
+		document.getElementById("t1").value = document.getElementById("t2").value;
+		document.getElementById("t2").value = '';
+	}
+}
+
+
+
+</script>
+</head>
+<body>
+<form name="myform">
+<table>
+<tr>
+	<td><textarea id="t1" cols="20" rows="5">안녕하신가영!</textarea></td>
+	<td><input type="button" value="▶" onclick="shift_right()"/><br/>
+		<input type="button" value="◀" onclick="shift_left()"/><br/>
+	</td>
+	<td><textarea id="t2" cols="20" rows="5"></textarea></td>
+</tr>
+</table>
+</form>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hello Ajax</title>
+<script type="text/javascript">
+var xhr = null;
+
+function createXMLHttpRequest() {
+	if (window.ActiveXObject) { //explorer 4.5-9
+		xhr = new ActiveXObject('Msxml2.XMLHTTP');
+		console.log('explorer 9 or under');
+	} else if (window.XMLHttpRequest){  //explorer 10 or chome
+		xhr = new XMLHttpRequest();
+		console.log('chrome, etc...');
+	} else {
+		alert('Browser not supported...');
+	}
+}
+
+
+function xhr_test(url) {
+	if (xhr === null) {
+		createXMLHttpRequest();
+	}
+	
+	printState();
+	if (url === 'iam.jsp') {
+		let name = document.getElementById('name').value;
+		if (name.trim() === '') {
+			alert('이름을 먼저 입력하세요');
+			document.getElementById('name').focus()
+			return;
+		}
+		url += '?name=' + encodeURIComponent(name);
+	}
+	xhr.open('GET',url,true);
+	printState();
+	
+	xhr.onreadystatechange = function() { // callback function
+		printState();
+		if (xhr.readyState === 4) {
+			if (xhr.status === 200) {
+				document.getElementById('output').innerHTML = xhr.responseText;
+			}
+		}
+	}
+	xhr.send(null);
+}
+function printState() {
+	console.log('readyState : ' + xhr.readyState);
+}	
+</script>
+</head>
+<body>
+<input type="button" value="get text"
+onclick="xhr_test('msg.txt')"/>
+<input type="button" value="get jsp"
+onclick="xhr_test('msg.jsp')"/>
+<br/>
+<hr/>
+<input type="text" id="name"/>
+<input type="button" value="say"
+onclick="xhr_test('iam.jsp')"/>
+<hr/>
+<div id="output"></div>
+</body>
+</html>

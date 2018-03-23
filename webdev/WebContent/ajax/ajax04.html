@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hello Ajax</title>
+<script type="text/javascript" src = "../js/jquery-3.3.1.js" ></script>
+<script type="text/javascript">
+$(function() {
+	$('#bt_say').click(function() {
+		$.getJSON( "test.json", function( data ) {
+			  var items = [];
+			  $.each( data, function( key, val ) {
+			    items.push( "<li id='" + key + "'>" + val + "</li>" );
+			  });
+			 
+			  let vol = $( "<ol/>", {
+			    "class": "my-new-list",
+			    html: items.join( "" )
+			  });
+			  
+			  $("#output").html(vol);
+			});
+	})
+});
+</script>
+</head>
+<body>
+<hr/>
+<input type="button" value="say" id = "bt_say"/>
+<hr/>
+<div id="output"></div>
+</body>
+</html>

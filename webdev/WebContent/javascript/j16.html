@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<pre>
+<script type="text/javascript">
+var students = [];
+students.push({name:'김연아',kor:100,eng:90,math:80,phi:70});
+students.push({name:'김동성',kor:100,eng:80,math:80,phi:70});
+students.push({name:'이상화',kor:90,eng:90,math:80,phi:70});
+
+for (let n in students) {
+	students[n].getTotal = function() {
+		return this.kor + this.eng + this.math + this.phi;
+	}
+}
+
+for (let n in students) {
+	students[n].getMean = function() {
+		return parseInt((this.kor + this.eng + this.math + this.phi) / (Object.keys(students[n]).length - 1));
+	}
+}
+
+document.write('이름\t국어\t영어\t수학\t철학\t총점\t평균\n');
+
+for (var n in students) {
+	with (students[n]) {
+		document.write(name + '\t' + kor + '\t' + eng + '\t' + math + '\t' + 
+				phi + '\t' + getTotal() +'\t' + getMean() + '\n');
+	}
+}
+
+</script>
+</pre>
+</body>
+</html>

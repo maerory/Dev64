@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+var httpRequest;
+if (window.XMLHttpRequest) {
+	httpRequest = new XMLHttpRequest();
+} else if (window.ActiveXObject) {
+	httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+httpRequest.onreadystatechange = function() {
+	httpRequest.open('GET','calendar.jsp',true);
+	httpRequest.send(null);
+}
+
+
+</script>
+</head>
+<body>
+</body>
+</html>

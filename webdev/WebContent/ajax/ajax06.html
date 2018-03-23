@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hello Ajax</title>
+<script type="text/javascript" src = "../js/jquery-3.3.1.js" ></script>
+<script type="text/javascript">
+$(function() {
+	$('#bt_say').click(function() {
+		$.getScript("get_script_test.js");
+	})
+});
+</script>
+</head>
+<body>
+<hr/>
+<input type="button" value="say" id = "bt_say"/>
+<hr/>
+<div id="output"></div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hello Ajax</title>
+<script type="text/javascript" src = "../js/jquery-3.3.1.js" ></script>
+<script type="text/javascript">
+$(function() {
+	$('#bt_say').click(function() {
+		let name = $('#name').val();
+		if (name === '') {
+			alert('이름을 입력하세요~');
+			$('#name').focus();
+			return;
+		}
+		$.post("iam.jsp", {'name' : name})
+		.done(function(data) {
+			  $( "#output" ).append( data + "<br/>" );
+		})
+		.fail(function() {
+			alert('수행에러');
+		})
+		.always(function() {
+			alert('always');
+		});
+	})
+});
+</script>
+</head>
+<body>
+<hr/>
+<input type="text" id="name"/>
+<input type="button" value="say" id = "bt_say"/>
+<hr/>
+<div id="output"></div>
+</body>
+</html>

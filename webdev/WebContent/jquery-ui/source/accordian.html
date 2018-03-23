@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Accordion - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/blitzer/jquery-ui.css">
+  <link rel="stylesheet" href="../themes/blitzer/theme.css">
+  <script src="../../js/jquery-3.3.1.js"></script>
+  <script src="../jquery-ui.js"></script>
+  <script>
+  $( function() {
+	  var icons = {
+		      header: "ui-icon-circle-arrow-e",
+		      activeHeader: "ui-icon-circle-arrow-s"
+		    };
+    $( "#accordion" ).accordion({
+    	icons : icons,
+    	animate : 1,
+    	collapsible : true
+    })
+  });
+  </script>
+</head>
+<body>
+ 
+<div id="accordion">
+  <h3>Section 1</h3>
+  <div>
+    <p>
+    Once there was a man.
+    </p>
+  </div>
+  <h3>Section 2</h3>
+  <div>
+    <p>
+    He lived in the white house up on the hill.
+    </p>
+  </div>
+  <h3>Section 3</h3>
+  <div>
+    <p>
+    Alone with his dog, Chip.
+    </p>
+    <ul>
+      <li>List item one</li>
+      <li>List item two</li>
+      <li>List item three</li>
+    </ul>
+  </div>
+  <h3>Section 4</h3>
+  <div>
+    <p>
+    A happy life
+    </p>
+    <p>
+    Nonetheless...
+    </p>
+  </div>
+</div>
+ 
+ 
+</body>
+</html>

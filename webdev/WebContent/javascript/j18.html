@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<pre>
+<script type="text/javascript">
+var Student = function(name,kor,eng,math,phi) {
+	this.name = name;
+	this.kor = kor;
+	this.eng = eng;
+	this.math = math;
+	this.phi = phi;
+}
+
+Student.prototype.getTotal = function() {
+		return this.kor + this.eng + this.math + this.phi;
+}
+
+Student.prototype.getTotal = function() {
+		return parseInt((this.kor + this.eng + this.math + this.phi) / (Object.keys(students[n]).length - 1));
+}
+
+document.write('이름\t국어\t영어\t수학\t철학\t총점\t평균\n');
+
+for (var n in students) {
+	with (students[n]) {
+		document.write(name + '\t' + kor + '\t' + eng + '\t' + math + '\t' + 
+				phi + '\t' + getTotal() +'\t' + getMean() + '\n');
+	}
+}
+
+var students = [];
+students.push(new Student('김연아',100,90,20,60));
+students.push(new Student('이상화',100,90,20,60));
+students.push(new Student('김은정',60,90,20,60));
+
+for (var n in students) {
+	document.write(students[n])
+}
+
+
+</script>
+</pre>
+</body>
+</html>

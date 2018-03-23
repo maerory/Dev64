@@ -1,0 +1,10 @@
+GET /webdev/basic/process.jsp?name=jung+dae+man HTTP/1.1
+Host: 70.12.50.183:80
+
+POST /webdev/basic/process.jsp
+Host: 70.12.50.163:80
+Content-type: acpplication/x-www-form-urlencoded
+User-agent: Mozilla/5.0
+Content-Length: 17
+
+name=jung+dae+man

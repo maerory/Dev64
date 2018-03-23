@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	 <Resource
+	    name="mydbcp"
+	    auth="Container"
+	    driverClassName="net.sf.log4jdbc.DriverSpy"
+	    type="javax.sql.DataSource"
+	    url="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"
+	    username="n1"
+	    password="n1"
+	    maxActive="50"
+	    maxWait="-1"
+	 />
+</Context>

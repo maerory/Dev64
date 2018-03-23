@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function goGame() {
+	let you = parseInt(document.getElementById("you").value);
+	let com = parseInt(Math.random() * 3) + 1;
+	alert (
+		'you : ' + whatMethod(you) + '\n' +
+		'com : ' + whatMethod(com) + '\n' +
+		getResult(you,com));
+}
+
+function whatMethod(val) {
+	switch(val) {
+	case 1 : return '가위';
+	case 2 : return '바위';
+	case 3 : return '보';
+	default: return '에러';
+	}
+}
+
+function getResult(v1,v2) {
+	switch(v1) {
+	case 1 : switch(v2) {
+		case 1 : return 'draw';
+		case 2 : return 'lose';
+		case 3 : return 'win';
+	}
+	case 2 : switch(v2) {
+		case 1 : return 'win';
+		case 2 : return 'draw';
+		case 3 : return 'lose';
+}
+	case 3 : switch(v2) {
+		case 1 : return 'lose';
+		case 2 : return 'win';
+		case 3 : return 'draw';
+}
+	}
+}
+
+</script>
+
+</head>
+<body>
+<h1>가위 바위 보!</h1>
+<select id="you">
+	<option value="1">가위</option>
+	<option value="2">바위</option>
+	<option value="3">보</option>
+</select>
+<button type="button" onclick="goGame()">선택</button>
+</body>
+</html>

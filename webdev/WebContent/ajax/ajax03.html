@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hello Ajax</title>
+<script type="text/javascript" src = "../js/jquery-3.3.1.js" ></script>
+<script type="text/javascript">
+jQuery.noConflict();
+jQuery(function() {
+	jQuery('#bt_get_text').click(function() {
+		jQuery('#output').load('msg.txt');
+	});
+	
+// 	$('#bt_get_jsp').click(function() {
+// 		$('#output').load('msg.jsp');
+// 	});
+	
+// 	$('#bt_say').click(function() {
+// 		let name = $('#name').val();
+// 		$('#output').load('iam.jsp?name=' + name);
+// 	};
+});
+
+</script>
+</head>
+<body>
+<input type="button" value="get text" id = "bt_get_text"/>
+<input type="button" value="get jsp" id = "bt_get_jsp"/>
+<br/>
+<hr/>
+<input type="text" id="name"/>
+<input type="button" value="say" id = "bt_say"/>
+<hr/>
+<div id="output"></div>
+</body>
+</html>
