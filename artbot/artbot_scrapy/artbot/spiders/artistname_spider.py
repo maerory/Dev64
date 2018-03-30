@@ -16,12 +16,34 @@ class ArtistsNameSpider(scrapy.Spider):
 
     def parse(self, response):
         for box in response.css('div.item-content'):
-            name = (box.css('h6.name a.link::text').extract_first()).strip()
             link = box.css('h6.name a::attr(href)').extract_first()
-            yield {
-                'name' : name,
-                'link' : link,
-            }
+            yield response.follow(link, self.parse_artist)
+
         next_page = response.css('li.next a::attr(href)').extract_first()
         if next_page is not None:
             yield response.follow(next_page, callback=self.parse)
+
+    def parse_artist(self, response):
+        name = (response.css('h1.name::text').extract_first()).strip()
+        bio = response.css('p.desc').extract_first()
+
+        if bio is not None:
+            bio = bio.split('\r\n')
+            nationality = bio[1].strip()
+            if len(bio) > 2:
+                years = bio[-2].strip()
+            else:
+                years = None
+        else:
+            nationality = years = None
+
+        art_link = response.css('div.img-block img::attr(src)').extract_first()
+        art_title = response.css('div.text-block::text').extract_first().strip()
+
+        yield {
+            'name' : str(name),
+            'nationality' : nationality,
+            'years' : years,
+            'art_title' : str(art_title),
+            'art_link' : art_link,
+        }
